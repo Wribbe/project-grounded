@@ -9,9 +9,12 @@ FLAGS := -Wall -pedantic -g
 
 all: ${BINS}
 
+# Additional dependencies for re-compilation.
+${BINS}: Makefile
+
 
 ${DIR_BIN}/% : ${DIR_SRC}/%.c | ${DIR_BIN}
-	gcc $^ -o $@ ${FLAGS}
+	gcc $(filter %.c %.h,$^) -o $@ ${FLAGS}
 
 
 ${DIR_BIN} :
